@@ -1,0 +1,16 @@
+{
+  "name": "ffmpeg-cli-args-generator",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "kame run ./index.ts"
+  },
+  "keywords": [],
+  "author": "Lily Scott <me@suchipi.com>",
+  "license": "MIT",
+  "dependencies": {
+    "change-case": "^4.1.2",
+    "kame": "^0.6.3"
+  }
+}
