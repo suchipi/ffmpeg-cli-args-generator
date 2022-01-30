@@ -11,5 +11,6 @@ export function parseGeneralSection(input: string): GeneralSection {
   return {
     name: firstLine,
     options,
+    userData: undefined,
   };
 }

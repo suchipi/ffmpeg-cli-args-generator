@@ -19,5 +19,6 @@ export function parseGeneralOption(inputLine: string): GeneralOption {
     usage: usage,
     description: description,
     args: args.map((arg) => changeCase.camelCase(arg)),
+    userData: undefined,
   };
 }

@@ -3,10 +3,6 @@ import { splitIntoChunks } from "./split-into-chunks";
 import { parsePreamble } from "./parse-preamble";
 import { parseGeneralSection } from "./parse-general-section";
 import { parseCoderSection } from "./parse-coder-section";
-import {
-  applyReplacementsToCoderSection,
-  applyReplacementsToGeneralSection,
-} from "./apply-replacements";
 
 export function parseHelpOutput(helpOutput: string): HelpOutput {
   const lines = helpOutput.split("\n");
@@ -17,13 +13,9 @@ export function parseHelpOutput(helpOutput: string): HelpOutput {
 
   const preamble = parsePreamble(preamblePart);
 
-  const generalSections = splitIntoChunks(generalPart)
-    .map(parseGeneralSection)
-    .map(applyReplacementsToGeneralSection);
+  const generalSections = splitIntoChunks(generalPart).map(parseGeneralSection);
 
-  const coderSections = splitIntoChunks(coderPart)
-    .map(parseCoderSection)
-    .map(applyReplacementsToCoderSection);
+  const coderSections = splitIntoChunks(coderPart).map(parseCoderSection);
 
   return {
     preamble,
