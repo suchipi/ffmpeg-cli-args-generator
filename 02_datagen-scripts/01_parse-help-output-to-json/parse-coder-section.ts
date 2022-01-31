@@ -14,6 +14,7 @@ export function parseCoderSection(input: string): CoderSection {
   const options = parseCoderOptions(lines);
 
   return {
+    is: "CoderSection",
     name,
     type: kind as "encoder" | "decoder" | "bsf" | "other",
     options,

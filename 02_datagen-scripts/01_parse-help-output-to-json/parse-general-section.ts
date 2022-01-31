@@ -9,6 +9,7 @@ export function parseGeneralSection(input: string): GeneralSection {
   });
 
   return {
+    is: "GeneralSection",
     name: firstLine,
     options,
     userData: undefined,

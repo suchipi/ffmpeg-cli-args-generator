@@ -18,6 +18,7 @@ export function parseHelpOutput(helpOutput: string): HelpOutput {
   const coderSections = splitIntoChunks(coderPart).map(parseCoderSection);
 
   return {
+    is: "HelpOutput",
     preamble,
     generalSections,
     coderSections,

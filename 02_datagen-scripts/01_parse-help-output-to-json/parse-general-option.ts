@@ -15,6 +15,7 @@ export function parseGeneralOption(inputLine: string): GeneralOption {
     .map((part) => part.trim());
 
   return {
+    is: "GeneralOption",
     name: changeCase.pascalCase(flag),
     usage: usage,
     description: description,

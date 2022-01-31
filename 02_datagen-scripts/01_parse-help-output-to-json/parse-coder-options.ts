@@ -2,6 +2,7 @@ import { CoderOption, CoderOptionChild } from "./types";
 
 function makeOption(): CoderOption {
   return {
+    is: "CoderOption",
     name: "unnamed",
     type: "<no type>",
     description: "no description",
@@ -13,6 +14,7 @@ function makeOption(): CoderOption {
 
 function makeChild(): CoderOptionChild {
   return {
+    is: "CoderOptionChild",
     name: "unnamed",
     description: "no description",
     contexts: [],

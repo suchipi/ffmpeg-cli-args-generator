@@ -10,7 +10,9 @@ const libVersionReader = reader({
 });
 
 export function parsePreamble(input: string): Preamble {
-  const output: Preamble = {};
+  const output: Preamble = {
+    is: "Preamble",
+  };
 
   const lines = input
     .split("\n")
