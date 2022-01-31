@@ -1,10 +1,8 @@
 import { HelpOutput } from "../01_parse-help-output-to-json/types";
 import { camelCase, pascalCase, snakeCase } from "change-case";
 import { makeBidoof, modify } from "bidoof";
+import { walk } from "bibarel";
 import * as is from "./matchers";
-import traverse from "@suchipi/traverse";
-import { set } from "lodash";
-import { produce } from "immer";
 
 export type UserDataMap = {
   general: {
@@ -53,14 +51,5 @@ const bidoof = makeBidoof([
 ]);
 
 export function addUserData(helpOutput: HelpOutput): HelpOutput<UserDataMap> {
-  const result = produce(helpOutput, (draft) => {
-    traverse(draft, (value, path) => {
-      const newValue = bidoof(value);
-      if (value !== newValue) {
-        set(draft, path, newValue);
-      }
-    });
-  });
-
-  return result as any;
+  return walk.mutate(helpOutput, bidoof);
 }

@@ -1,9 +1,7 @@
 import { makeBidoof, replace, set, t } from "bidoof";
-import traverse from "@suchipi/traverse";
+import { walk } from "bibarel";
 import { HelpOutput } from "../01_parse-help-output-to-json/types";
 import { UserDataMap } from "./add-userdata";
-import { set as lodashSet } from "lodash";
-import { produce } from "immer";
 
 // prettier-ignore
 const bidoof = makeBidoof([
@@ -147,14 +145,5 @@ const bidoof = makeBidoof([
 export function applyReplacements(
   helpOutput: HelpOutput<UserDataMap>
 ): HelpOutput<UserDataMap> {
-  const result = produce(helpOutput, (draft) => {
-    traverse(draft, (value, path) => {
-      const newValue = bidoof(value);
-      if (value !== newValue) {
-        lodashSet(draft, path, newValue);
-      }
-    });
-  });
-
-  return result as any;
+  return walk.mutate(helpOutput, bidoof);
 }
