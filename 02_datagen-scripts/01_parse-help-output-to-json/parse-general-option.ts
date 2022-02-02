@@ -1,8 +1,10 @@
-import * as changeCase from "change-case";
 import { GeneralOption } from "./types";
 
 export function parseGeneralOption(inputLine: string): GeneralOption {
-  const [first = "", second = ""] = inputLine.split(/\s{2,99999}|\s+--\s+/);
+  const [first = "", second = ""] = inputLine
+    .trim()
+    .split(/\s{2,99999}|\s*--\s+/g)
+    .filter((part) => part.trim().length != 0);
   const flag = first.split(/\s/)[0].trim();
   const description = second.trim();
   const usage = first.trim();
@@ -16,10 +18,10 @@ export function parseGeneralOption(inputLine: string): GeneralOption {
 
   return {
     is: "GeneralOption",
-    name: changeCase.pascalCase(flag),
+    name: flag,
     usage: usage,
     description: description,
-    args: args.map((arg) => changeCase.camelCase(arg)),
+    args: args,
     userData: undefined,
   };
 }

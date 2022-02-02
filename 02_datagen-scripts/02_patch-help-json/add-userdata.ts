@@ -1,6 +1,6 @@
 import { HelpOutput } from "../01_parse-help-output-to-json/types";
 import { camelCase, pascalCase, snakeCase } from "change-case";
-import { makeBidoof, modify } from "bidoof";
+import { makeMapperFunction, modify } from "bidoof";
 import { walk } from "bibarel";
 import * as is from "./matchers";
 
@@ -27,13 +27,13 @@ export type UserDataMap = {
 };
 
 function addVarName(someCase) {
-  return modify((obj) => {
+  return modify.mutate((obj) => {
     obj.userData = obj.userData || {};
     obj.userData.varName = someCase(obj.name);
   });
 }
 
-const bidoof = makeBidoof([
+const addVarNames = makeMapperFunction([
   is.GeneralSection,
   addVarName(pascalCase),
 
@@ -51,5 +51,5 @@ const bidoof = makeBidoof([
 ]);
 
 export function addUserData(helpOutput: HelpOutput): HelpOutput<UserDataMap> {
-  return walk.mutate(helpOutput, bidoof);
+  return walk.mutate(helpOutput, addVarNames);
 }
